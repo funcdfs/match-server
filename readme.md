@@ -17,5 +17,12 @@
 
 在 `add_user` 和 `remove_user` 中添加 `return 0;` 编译通过 `main.cpp` 
 
+4. 第四步骤
+
+编译 `main.cpp` 
+
+- `g++ -c main.cpp gen-cpp/*.cpp`
+- `g++ -c main.cpp`
+- `g++ *.o -o main -lthrift` -lthrift 代表加上 thrift 的动态链接库
 
 

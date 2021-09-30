@@ -7,6 +7,10 @@
 #include <thrift/transport/TServerSocket.h>
 #include <thrift/transport/TBufferTransports.h>
 
+// add
+#include <iostream>
+using namespace std;
+
 using namespace ::apache::thrift;
 using namespace ::apache::thrift::protocol;
 using namespace ::apache::thrift::transport;
@@ -15,35 +19,38 @@ using namespace ::apache::thrift::server;
 using namespace  ::match_service;
 
 class MatchHandler : virtual public MatchIf {
- public:
-  MatchHandler() {
-    // Your initialization goes here
-  }
+    public:
+        MatchHandler() {
+            // Your initialization goes here
+        }
 
-  int32_t add_user(const User& user, const std::string& Info) {
-    // Your implementation goes here
-    printf("add_user\n");
-    return 0;
-  }
+        int32_t add_user(const User& user, const std::string& Info) {
+            // Your implementation goes here
+            printf("add_user\n");
+            return 0;
+        }
 
-  int32_t remove_user(const User& user, const std::string& Info) {
-    // Your implementation goes here
-    printf("remove_user\n");
-    return 0;
-  }
+        int32_t remove_user(const User& user, const std::string& Info) {
+            // Your implementation goes here
+            printf("remove_user\n");
+            return 0;
+        }
 
 };
 
 int main(int argc, char **argv) {
-  int port = 9090;
-  ::std::shared_ptr<MatchHandler> handler(new MatchHandler());
-  ::std::shared_ptr<TProcessor> processor(new MatchProcessor(handler));
-  ::std::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
-  ::std::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
-  ::std::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
+    int port = 9090;
+    ::std::shared_ptr<MatchHandler> handler(new MatchHandler());
+    ::std::shared_ptr<TProcessor> processor(new MatchProcessor(handler));
+    ::std::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
+    ::std::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
+    ::std::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
 
-  TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
-  server.serve();
-  return 0;
+    TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
+
+    cout << "strat match server" << endl;
+
+    server.serve();
+    return 0;
 }
 
