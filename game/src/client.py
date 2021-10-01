@@ -24,7 +24,8 @@ def operate(op, user_id, username, score):
 
     # Connect!
     transport.open()
-
+    
+    # 自定义内容：
     user = User(user_id, username, score)
 
     if op == "add":
